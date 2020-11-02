@@ -75,4 +75,38 @@ public class Scrollable {
         PreparedStatement prepareStatement = connection.prepareStatement("",ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
         return prepareStatement;
     }
+
+    public static void update(PreparedStatement preparedStatement, Statement statement) throws SQLException {
+        ResultSet resultSet = null;
+        if (preparedStatement != null) {
+            resultSet = preparedStatement.executeQuery("select * from books");
+        }
+        if (statement != null) {
+            resultSet = statement.executeQuery("select * from books");
+        }
+        if(resultSet.last()) {
+            resultSet.updateString("name", "last value");
+            resultSet.updateRow();
+        }
+        if(resultSet.first()){
+            resultSet.updateString("name", "first value");
+            resultSet.updateRow();
+        }
+        if (resultSet.absolute(4)) {
+            resultSet.updateString("name", "4 value");
+            resultSet.updateRow();
+        }
+        if (resultSet.relative(2)) {
+            resultSet.updateString("name", "+2 value");
+            resultSet.updateRow();
+        }
+        if (resultSet.relative(-2)) {
+            resultSet.updateString("name", "-2 value");
+            resultSet.updateRow();
+        }
+        if (resultSet.previous()) {
+            resultSet.updateString("name", "previous value");
+            resultSet.updateRow();
+        }
+    }
 }
