@@ -67,12 +67,12 @@ public class Scrollable {
     }
 
     private static Statement writeOnlyStatement(Connection connection) throws SQLException {
-        Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.FETCH_FORWARD);
+        Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
         return statement;
     }
 
     private static PreparedStatement writeOnlyPrepareStatement(Connection connection) throws SQLException {
-        PreparedStatement prepareStatement = connection.prepareStatement("",ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.FETCH_FORWARD);
+        PreparedStatement prepareStatement = connection.prepareStatement("",ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
         return prepareStatement;
     }
 }
